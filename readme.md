@@ -1,5 +1,7 @@
 # Minimal Example With Lightshafts Effect
 
+![minimal_lightshafts.gif](.github/minimal_lightshafts.gif?raw=true)
+
 This example was originally created by Fabrizio Pietrucci and includes a 'post processing pipeline' to process shaders in a frame buffer in a 
 sequence. This is kind of complicated and I back engineered his example and removed things that didn't do anything to condense the effect into 
 a single file example.
