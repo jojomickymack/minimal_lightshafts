@@ -55,6 +55,8 @@ class Game(val app: App) : KtxScreen {
     private val occlusionApproxShader = ShaderProgram(Gdx.files.internal("shaders/default.vert"), Gdx.files.internal("shaders/occlusion.frag"))
 
     override fun render(delta: Float) {
+        sun.x = 0f
+        sun.y = 0f
 
         window.x = Gdx.input.x.toFloat()
         window.y = app.height - Gdx.input.y.toFloat()
@@ -90,7 +92,7 @@ class Game(val app: App) : KtxScreen {
         app.sb.shader = occlusionApproxShader
         app.sb.begin()
 
-        occlusionApproxShader.setUniformf("cent", sun.x, sun.y)
+        occlusionApproxShader.setUniformf("cent", 0f, 0f)
 
         app.sb.draw(occludersFBO.colorBufferTexture, 0f, 0f, app.width, app.height, 0f, 0f, 1f, 1f)
 
@@ -99,7 +101,6 @@ class Game(val app: App) : KtxScreen {
 
         // cleanup and reset operations
         app.view.apply()
-        app.sb.projectionMatrix = app.view.camera.combined
         app.sb.enableBlending()
         app.sb.shader = null
 
