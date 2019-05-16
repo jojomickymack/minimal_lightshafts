@@ -92,7 +92,7 @@ class Game(val app: App) : KtxScreen {
         app.sb.shader = occlusionApproxShader
         app.sb.begin()
 
-        occlusionApproxShader.setUniformf("cent", 0f, 0f)
+        occlusionApproxShader.setUniformf("cent", 1f, 1f)
 
         app.sb.draw(occludersFBO.colorBufferTexture, 0f, 0f, app.width, app.height, 0f, 0f, 1f, 1f)
 
