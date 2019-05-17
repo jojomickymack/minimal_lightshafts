@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20
 import ktx.app.KtxScreen
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.Texture.TextureFilter
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
@@ -14,6 +15,7 @@ import org.central.App
 class Game(val app: App) : KtxScreen {
 
     private var window = Texture("images/small_window_wall.png")
+    private val downscaleFactor = 3
 
     private lateinit var occludersFbo: FrameBuffer
     private lateinit var occlusionApprox: FrameBuffer
@@ -24,13 +26,13 @@ class Game(val app: App) : KtxScreen {
 
     override fun resize(width: Int, height: Int) {
         super.resize(width, height)
-        occludersFbo = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
-        occlusionApprox = FrameBuffer(Pixmap.Format.RGB888, width, height, false)
+        occludersFbo = FrameBuffer(Pixmap.Format.RGBA8888, width / downscaleFactor, height / downscaleFactor, false)
+        occlusionApprox = FrameBuffer(Pixmap.Format.RGB888, width / downscaleFactor, height / downscaleFactor, false)
     }
 
     override fun show() {
-        occludersFbo = FrameBuffer(Pixmap.Format.RGBA8888, app.width.toInt(), app.height.toInt(), false)
-        occlusionApprox = FrameBuffer(Pixmap.Format.RGB888, app.width.toInt(), app.height.toInt(), false)
+        occludersFbo = FrameBuffer(Pixmap.Format.RGBA8888, app.width.toInt() / downscaleFactor, app.height.toInt() / downscaleFactor, false)
+        occlusionApprox = FrameBuffer(Pixmap.Format.RGB888, app.width.toInt() / downscaleFactor, app.height.toInt() / downscaleFactor, false)
         font.data.setScale(5f)
     }
 
