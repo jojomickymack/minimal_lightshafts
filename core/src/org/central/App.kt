@@ -15,9 +15,10 @@ class App : KtxGame<Screen>() {
     var height = 0f
 
     lateinit var sb: SpriteBatch
-    lateinit var view: StretchViewport
 
     lateinit var cam: OrthographicCamera
+    lateinit var view: StretchViewport
+
     lateinit var stg: Stage
 
     override fun create() {
@@ -39,8 +40,9 @@ class App : KtxGame<Screen>() {
     override fun resize(width: Int, height: Int) {
         this.width = width.toFloat()
         this.height = height.toFloat()
-        this.cam.setToOrtho(false, this.width, this.height)
+        this.cam.setToOrtho(false, width.toFloat(), height.toFloat())
         this.stg.batch.projectionMatrix = this.cam.combined
+        this.stg.viewport.update(width, height, true)
     }
 
     override fun dispose() {
